@@ -14,19 +14,20 @@ def run_game():
         ai_settings.screen_width, ai_settings.screen_height)) #screen: surface
     pygame.display.set_caption("Alien Invasion")
 
-    # create a ship
+    # create a ship, a bullets Group and an aliens Group
     ship = Ship(ai_settings, screen)
-    # create a Group to save bullets
     bullets = Group()
+    aliens = Group()
 
-    # create an alien
-    alien = Alien(ai_settings, screen)
+    # create aliens Group
+    gf.create_fleet(ai_settings, screen, ship, aliens)
 
     # start main loop of the game
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, alien, bullets)
+        gf.update_aliens(ai_settings, aliens)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
 run_game()
